@@ -34,7 +34,8 @@ var app = {
             document.getElementById("btRegister").addEventListener("click", self.openNewRegister);
             document.getElementById("btSave").addEventListener("click", self.saveRegister);
         }).fail(function (error) {
-            alert(error);
+            console.error('Error on initialize database', error);
+            alert('Ocorreu um erro ao iniciar o banco de dados');
         });
 
         this.overrideBrowserAlert();
@@ -43,22 +44,23 @@ var app = {
     openAllRegisters: function (e) {
         e.preventDefault();
 
-        $registerList = $('#registerList').remove();
-        $registerContainer = $('#register').remove();
+        var $registerList = $('#registerList');
+        var $registerContainer = $('.register').remove();
 
         var registerList = self.storageService.getRegister().done(function (registers) {
             for (var register in registers) {
                 var $div = $registerContainer.clone();
                 var register = registers[register];
 
-                $div.find('#txtListAddress').text(register.address);
-                $div.find('#txtListDistrict').text(register.district);
-                $div.find('#txtListImpact').text(register.impact);
+                $div.find('.txtListAddress').text(register.endereco);
+                $div.find('.txtListDistrict').text(register.bairro);
+                $div.find('.txtListImpact').text('Impacto nível ' + register.impacto);
 
                 $registerList.append($div);
             }
         }).fail(function (error) {
-            alert(error);
+            console.error('Error on open all registers', error);
+            alert('Ocorreu um erro ao buscar os registros');
         });
 
         $('#view-home').addClass('hide');
@@ -101,7 +103,8 @@ var app = {
                 $('#view-register').addClass('hide');
                 $('#view-register').removeClass('show');
             }).fail(function (error) {
-                alert(error);
+                console.error('Error on save data', error);
+                alert('Ocorreu um erro ao salvar os dados');
             });
         }
     },
@@ -159,7 +162,7 @@ var app = {
                 navigator.notification.alert(
                     message,    // message
                     null,       // callback
-                    "POC", // title
+                    "POC",      // title
                     'OK'        // buttonName
                 );
             };

@@ -41,7 +41,7 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
+    /* text-transform:uppercase; */
     width:100%;
 }
 
@@ -104,5 +104,35 @@ body {
 
 .show {
     display: block;
+}
+
+label {
+    font-weight: bold
+}
+
+.registerList {
+    text-align: left;
+}
+
+.register {
+    text-align: left;
+    border-bottom-color: #333333;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.register span{
+    text-align: left;
+    display: block;
+    text-transform: capitalize;
+    padding: 2.5px 0px 2.5px 0px;
+}
+
+.txtListDistrict {
+    font-size: 14.5px;
+}
+
+.txtListAddress, .txtListImpact {
+    font-size: 11px;
 }
 

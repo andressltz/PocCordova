@@ -6,7 +6,9 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "emulate-ios": "cordova emulate ios --target=\"iPhone-6, 11.2\""
+        "emulate-ios": "cordova emulate ios --target=\"iPhone-6, 11.2\"",
+        "emulate-browser": "cordova emulate browser",
+        "emulate-android": "cordova emulate android"
     },
     "author": "Apache Cordova Team",
     "license": "Apache-2.0",
