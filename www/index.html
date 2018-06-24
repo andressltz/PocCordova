@@ -55,31 +55,45 @@
 
         <div id="view-list" class="panel">
             <h2>Ocorrências</h2>
+            <div id="registerList">
+                <div id="register">
+                    <div class="row">
+                        <label>Endereço</label>
+                        <span id="txtListAddress"></span>
+                    </div>
+                    <div class="row">
+                        <label>Bairro</label>
+                        <span id="txtListDistrict"></span>
+                    </div>
+                    <div class="row">
+                        <label>Impacto</label>
+                        <span id="txtListImpact"></span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="view-register" class="panel">
             <h2>Salvar ocorrência</h2>
-            <form>
-                <div class="row">
-                    <label>Endereço</label>
-                    <input type="text" placeholder="Endereço" name="txtListAddress" />
-                </div>
-                <div class="row">
-                    <label>Bairro</label>
-                    <input type="text" placeholder="Bairro" name="txtDistrict" />
-                </div>
-                <div class="row">
-                    <label>Impacto</label>
-                    <input type="number" placeholder="Impacto" name="txtImpact" />
-                </div>
-                <div class="row">
-                    <label>Ameaça</label>
-                    <textarea placeholder="Ameaça" name="txtDescription"></textarea>
-                </div>
-                <div class="row">
-                    <button id="btSave" class="btn btn-primary">Salvar</button>
-                </div>
-            </form>
+            <div class="row">
+                <label>Endereço</label>
+                <input type="text" placeholder="Endereço" name="txtAddress" id="txtAddress" />
+            </div>
+            <div class="row">
+                <label>Bairro</label>
+                <input type="text" placeholder="Bairro" name="txtDistrict" id="txtDistrict" />
+            </div>
+            <div class="row">
+                <label>Impacto</label>
+                <input type="number" placeholder="Impacto" name="txtImpact" id="txtImpact" />
+            </div>
+            <div class="row">
+                <label>Ameaça</label>
+                <textarea placeholder="Ameaça" name="txtDescription" id="txtDescription"></textarea>
+            </div>
+            <div class="row">
+                <button id="btSave" class="btn btn-primary">Salvar</button>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

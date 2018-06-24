@@ -18,9 +18,9 @@
  */
 var app = {
     // Application Constructor
-    initialize: function() {
+    initialize: function () {
         self = this;
-        new SQLiteStorageService().done(function(service) {
+        new SQLiteStorageService().done(function (service) {
             self.storageService = service;
 
             $('#view-home').addClass('show');
@@ -29,28 +29,47 @@ var app = {
             $('#view-list').removeClass('show');
             $('#view-register').addClass('hide');
             $('#view-register').removeClass('show');
-    
+
             document.getElementById("btViewAll").addEventListener("click", self.openAllRegisters);
             document.getElementById("btRegister").addEventListener("click", self.openNewRegister);
             document.getElementById("btSave").addEventListener("click", self.saveRegister);
-        }).fail(function(error) {
+        }).fail(function (error) {
             alert(error);
         });
+
+        this.overrideBrowserAlert();
     },
 
-    openAllRegisters: function(e) {
+    openAllRegisters: function (e) {
         e.preventDefault();
+
+        $registerList = $('#registerList').remove();
+        $registerContainer = $('#register').remove();
+
+        var registerList = self.storageService.getRegister().done(function (registers) {
+            for (var register in registers) {
+                var $div = $registerContainer.clone();
+                var register = registers[register];
+
+                $div.find('#txtListAddress').text(register.address);
+                $div.find('#txtListDistrict').text(register.district);
+                $div.find('#txtListImpact').text(register.impact);
+
+                $registerList.append($div);
+            }
+        }).fail(function (error) {
+            alert(error);
+        });
+
         $('#view-home').addClass('hide');
         $('#view-home').removeClass('show');
         $('#view-list').addClass('show');
         $('#view-list').removeClass('hide');
         $('#view-register').addClass('hide');
         $('#view-register').removeClass('show');
-        console.log('open all registers 2');
     },
 
-    openNewRegister: function(e) {
-        console.log('open new register 1');
+    openNewRegister: function (e) {
         e.preventDefault();
         $('#view-home').addClass('hide');
         $('#view-home').removeClass('show');
@@ -58,31 +77,45 @@ var app = {
         $('#view-list').removeClass('show');
         $('#view-register').addClass('show');
         $('#view-register').removeClass('hide');
-        console.log('open new register 2');
     },
 
-    saveRegister: function(e) {
-        console.log('open save 1');
+    saveRegister: function (e) {
         e.preventDefault();
-        $('#view-home').addClass('show');
-        $('#view-home').removeClass('hide');
-        $('#view-list').addClass('hide');
-        $('#view-list').removeClass('show');
-        $('#view-register').addClass('hide');
-        $('#view-register').removeClass('show');
-        console.log('open save 2');
+
+        var address = $('#txtAddress').val();
+        var district = $('#txtDistrict').val();
+        var impact = $('#txtImpact').val();
+        var description = $('#txtDescription').val();
+
+        if (!address || !district || !impact || !description) {
+            alert('Por favor, preencha todos os campos');
+            return;
+        } else {
+            var result = self.storageService.addRegister(address, district, impact, description);
+            result.done(function () {
+                alert('Ocorrência salva com sucesso');
+                $('#view-home').addClass('show');
+                $('#view-home').removeClass('hide');
+                $('#view-list').addClass('hide');
+                $('#view-list').removeClass('show');
+                $('#view-register').addClass('hide');
+                $('#view-register').removeClass('show');
+            }).fail(function (error) {
+                alert(error);
+            });
+        }
     },
 
     // deviceready Event Handler
     //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
-    onDeviceReady: function() {
+    onDeviceReady: function () {
         this.receivedEvent('deviceready');
     },
 
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    receivedEvent: function (id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -91,6 +124,46 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+
+    // showHome: function() {
+    //     $('#view-home').addClass('show');
+    //     $('#view-home').removeClass('hide');
+    //     $('#view-list').addClass('hide');
+    //     $('#view-list').removeClass('show');
+    //     $('#view-register').addClass('hide');
+    //     $('#view-register').removeClass('show');
+    // },
+
+    // showList: function() {
+    //     $('#view-home').addClass('hide');
+    //     $('#view-home').removeClass('show');
+    //     $('#view-list').addClass('show');
+    //     $('#view-list').removeClass('hide');
+    //     $('#view-register').addClass('hide');
+    //     $('#view-register').removeClass('show');
+    // },
+
+    // showNewRegister: function() {
+    //     $('#view-home').addClass('hide');
+    //     $('#view-home').removeClass('show');
+    //     $('#view-list').addClass('hide');
+    //     $('#view-list').removeClass('show');
+    //     $('#view-register').addClass('show');
+    //     $('#view-register').removeClass('hide');
+    // }
+
+    overrideBrowserAlert: function () {
+        if (navigator.notification) { // Override default HTML alert with native dialog
+            window.alert = function (message) {
+                navigator.notification.alert(
+                    message,    // message
+                    null,       // callback
+                    "POC", // title
+                    'OK'        // buttonName
+                );
+            };
+        }
     }
 };
 
