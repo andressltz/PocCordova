@@ -20,6 +20,52 @@ var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+
+        $('#view-home').addClass('show');
+        $('#view-home').removeClass('hide');
+        $('#view-list').addClass('hide');
+        $('#view-list').removeClass('show');
+        $('#view-register').addClass('hide');
+        $('#view-register').removeClass('show');
+
+        document.getElementById("btViewAll").addEventListener("click", this.openAllRegisters);
+        document.getElementById("btRegister").addEventListener("click", this.openNewRegister);
+        document.getElementById("btSave").addEventListener("click", this.saveRegister);
+    },
+
+    openAllRegisters: function(e) {
+        e.preventDefault();
+        $('#view-home').addClass('hide');
+        $('#view-home').removeClass('show');
+        $('#view-list').addClass('show');
+        $('#view-list').removeClass('hide');
+        $('#view-register').addClass('hide');
+        $('#view-register').removeClass('show');
+        console.log('open all registers 2');
+    },
+
+    openNewRegister: function(e) {
+        console.log('open new register 1');
+        e.preventDefault();
+        $('#view-home').addClass('hide');
+        $('#view-home').removeClass('show');
+        $('#view-list').addClass('hide');
+        $('#view-list').removeClass('show');
+        $('#view-register').addClass('show');
+        $('#view-register').removeClass('hide');
+        console.log('open new register 2');
+    },
+
+    saveRegister: function(e) {
+        console.log('open save 1');
+        e.preventDefault();
+        $('#view-home').addClass('show');
+        $('#view-home').removeClass('hide');
+        $('#view-list').addClass('hide');
+        $('#view-list').removeClass('show');
+        $('#view-register').addClass('hide');
+        $('#view-register').removeClass('show');
+        console.log('open save 2');
     },
 
     // deviceready Event Handler

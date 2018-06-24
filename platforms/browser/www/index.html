@@ -29,10 +29,12 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-`al'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <title>Ameaças Ambientais</title>
 </head>
@@ -40,17 +42,48 @@
 <body>
     <div class="app">
         <h1>Ameaças Ambientais</h1>
-        <h2>Bem Vindo</h2>
-        <div id="deviceready" class="panel">
+        <div id="view-home" class="panel">
+            <h2>Bem Vindo</h2>
             <div class="row">
                 <span>Viu alguma ameaça ambiental? Registre agora mesmo</span>
             </div>
             <div class="row">
-                <button>VER TODOS</button>
-                <button>CADASTRAR</button>
+                <button id="btViewAll" class="btn btn-primary">Ver todos</button>
+                <button id="btRegister" class="btn btn-primary">Cadastrar</button>
             </div>
         </div>
+
+        <div id="view-list" class="panel">
+            <h2>Ocorrências</h2>
+        </div>
+
+        <div id="view-register" class="panel">
+            <h2>Salvar ocorrência</h2>
+            <form>
+                <div class="row">
+                    <label>Endereço</label>
+                    <input type="text" placeholder="Endereço" name="txtListAddress" />
+                </div>
+                <div class="row">
+                    <label>Bairro</label>
+                    <input type="text" placeholder="Bairro" name="txtDistrict" />
+                </div>
+                <div class="row">
+                    <label>Impacto</label>
+                    <input type="number" placeholder="Impacto" name="txtImpact" />
+                </div>
+                <div class="row">
+                    <label>Ameaça</label>
+                    <textarea placeholder="Ameaça" name="txtDescription"></textarea>
+                </div>
+                <div class="row">
+                    <button id="btSave" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
     </div>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 </body>
