@@ -19,18 +19,23 @@
 var app = {
     // Application Constructor
     initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        self = this;
+        new SQLiteStorageService().done(function(service) {
+            self.storageService = service;
 
-        $('#view-home').addClass('show');
-        $('#view-home').removeClass('hide');
-        $('#view-list').addClass('hide');
-        $('#view-list').removeClass('show');
-        $('#view-register').addClass('hide');
-        $('#view-register').removeClass('show');
-
-        document.getElementById("btViewAll").addEventListener("click", this.openAllRegisters);
-        document.getElementById("btRegister").addEventListener("click", this.openNewRegister);
-        document.getElementById("btSave").addEventListener("click", this.saveRegister);
+            $('#view-home').addClass('show');
+            $('#view-home').removeClass('hide');
+            $('#view-list').addClass('hide');
+            $('#view-list').removeClass('show');
+            $('#view-register').addClass('hide');
+            $('#view-register').removeClass('show');
+    
+            document.getElementById("btViewAll").addEventListener("click", self.openAllRegisters);
+            document.getElementById("btRegister").addEventListener("click", self.openNewRegister);
+            document.getElementById("btSave").addEventListener("click", self.saveRegister);
+        }).fail(function(error) {
+            alert(error);
+        });
     },
 
     openAllRegisters: function(e) {

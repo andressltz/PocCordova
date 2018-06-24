@@ -1,0 +1,10 @@
+➜  PocCordova git:(master) ✗ cordova build
+Android Studio project detected
+ANDROID_HOME=/Users/andresschultz/Library/Android/sdk
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home
+studio
+(node:6311) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): CordovaError: Could not find an installed version of Gradle either in Android Studio,
+or on your system to install the gradle wrapper. Please include gradle 
+in your path, or install Android Studio
+(node:6311) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+➜  PocCordova git:(master) ✗ 
